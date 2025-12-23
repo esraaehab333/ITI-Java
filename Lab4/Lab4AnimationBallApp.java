@@ -2,7 +2,6 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.util.Random;
 
 public class Lab4AnimationBallApp extends JPanel implements Runnable {
     Thread th;
@@ -10,15 +9,9 @@ public class Lab4AnimationBallApp extends JPanel implements Runnable {
     int y = 200;
     int ballSize = 40;
     int dx = 3;
-    int dy = 2;
-    Random random;
+    int dy = 3;
     
     public Lab4AnimationBallApp() {
-        random = new Random();
-        dx = random.nextInt(5) + 2;
-        dy = random.nextInt(5) + 2;
-        if(random.nextBoolean()) dx = -dx;
-        if(random.nextBoolean()) dy = -dy;
         th = new Thread(this);
         th.start();
     }
@@ -36,11 +29,9 @@ public class Lab4AnimationBallApp extends JPanel implements Runnable {
                 y += dy;
                 if(x <= 0 || x >= getWidth() - ballSize) {
                     dx = -dx;
-                    dy += random.nextInt(3) - 1;
                 }
                 if(y <= 0 || y >= getHeight() - ballSize) {
                     dy = -dy;
-                    dx += random.nextInt(3) - 1;
                 }
                 repaint();
                 Thread.sleep(30);
